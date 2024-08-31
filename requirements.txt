@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+requests
+transformers
+chromadb
+google.generativeai
