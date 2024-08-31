@@ -26,9 +26,23 @@ def process_pdf(file_path):
     except Exception as e:
         print(f"Failed to process {file_path}: {e}")
 
-def update_knowledge_base(directory):
-    """Process all PDF files in the given directory and update the ChromaDB vector store."""
-    for filename in os.listdir(directory):
-        if filename.endswith(".pdf"):
-            file_path = os.path.join(directory, filename)
-            process_pdf(file_path)
+def update_knowledge_base(path):
+    if os.path.isfile(path):
+        # Handle the file directly
+        process_file(path)
+    elif os.path.isdir(path):
+        # Process all files in the directory
+        for filename in os.listdir(path):
+            file_path = os.path.join(path, filename)
+            if os.path.isfile(file_path):
+                process_file(file_path)
+    else:
+        raise ValueError(f"Invalid path: {path} is neither a file nor a directory")
+
+def process_file(file_path):
+    # Add your file processing logic here
+
+
+    print(f"Processing file: {file_path}")
+    update_knowledge_base("path/to/temp.pdf")
+    # For example, you might want to process the PDF file here
